@@ -1,8 +1,8 @@
-class Movie < ApplicationRecord
-  has_many :bookmarks
+class List < ApplicationRecord
+  has_many :bookmarks, dependent: :destroy
+  has_many :movies, through: :bookmarks
 
-  validates :title, presence: true, uniqueness: true
-  validates :overview, presence: true
-  validates :title, length: { maximum: 100 }
+  validates :name, uniqueness: true, presence: true
+  validates :name, length: { maximum: 50 }
 
 end
