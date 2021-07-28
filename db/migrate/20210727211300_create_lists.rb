@@ -1,6 +1,6 @@
 class CreateLists < ActiveRecord::Migration[6.0]
   def change
-    create_table :list do |t|
+    create_table :lists do |t|
       t.string :name
 
       t.timestamps
