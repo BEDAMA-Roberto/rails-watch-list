@@ -1,63 +1,40 @@
 class ListsController < ApplicationController
-  def index
-    @list = List.all
-  end
-
-  def show
-  end
-
-  def new
-    @list = List.new
-  end
-private
-
-  def params_list
-    params.require(:list).permit(:name)
-  end
-
-  def set_find_list
-    @list = List.find(params[:id])
-  end
-end
-=begin class ListsController < ApplicationController
-  before_action :set_find_list, only: %i[show edit]
+  before_action :set_list, only: [:show, :destroy]
 
   def index
     @lists = List.all
   end
 
+  def show
+    @bookmark = Bookmark.new
+    @review = Review.new(list: @list)
+  end
+
   def new
-    @record = List.new
+    @list = List.new
   end
 
   def create
-    @list = List.new(params_list)
-    @list.save
-    redirect_to list_path(@list.id)
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to list_path(@list)
+    else
+      render :new
+    end
   end
-
-  def edit; end
-
-  def update
-    @list.update(params_list)
-    redirect_to list_path(@list.id)
-  end
-
-  def show; end
 
   def destroy
     @list.destroy
-    redirect_to list_path(@list)
+    redirect_to lists_path
   end
 
   private
 
-  def params_list
-    params.require(:list).permit(:name)
-  end
-
-  def set_find_list
+  def set_list
     @list = List.find(params[:id])
   end
+
+  def list_params
+    params.require(:list).permit(:name)
+  end
 end
- =end
