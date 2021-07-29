@@ -1,4 +1,4 @@
-.cover {
+.banner {
   background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(asset_path('cover.jpg'));
   height: 500px;
   width: 100%;
@@ -7,6 +7,6 @@
   background-position: center;
 }
 
-.typed-js {
-  min-height: 33.6px;
+.card-large {
+  height: 50vh;
 }
